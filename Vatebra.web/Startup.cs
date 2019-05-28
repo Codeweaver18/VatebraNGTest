@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Vatebra.DataAccessLayer.Dbcontext;
 using Vatebra.DataAccessLayer.Repositories;
+using Vatebra.core.Services;
 
 namespace Vatebra.web
 {
@@ -43,6 +44,7 @@ namespace Vatebra.web
              options.UseSqlServer(cxn)
              .UseLazyLoadingProxies());
             services.AddTransient<BooksRepository>();
+            services.AddTransient<BooksService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

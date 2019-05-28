@@ -1,57 +1,47 @@
-﻿using System;
+﻿using Vatebra.DataAccessLayer.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Vatebra.DataAccessLayer.Dbcontext;
+using Microsoft.Extensions.Logging;
 using Vatebra.DataAccessLayer.Entities;
-using System.Linq;
 
-namespace Vatebra.DataAccessLayer.Repositories
+namespace Vatebra.core.Services
 {
-
-    /// <summary>
-    /// Class repository for handling all sort of database persistency.
-    /// //******************
-   
-    /// </summary>
-    public class BooksRepository : GenericRepository<BooksRepository>
+    public class BooksService
     {
-        private VatebraDbContext _dbContext;
-
-        public BooksRepository(VatebraDbContext dbContext)
-            : base(dbContext)
+        private readonly BooksRepository _repo;
+        private readonly ILogger _logger;
+        public BooksService(BooksRepository repo, ILogger logger)
         {
-
-            _dbContext = dbContext;
+            _repo = repo;
+            _logger = logger;
         }
 
 
         /// <summary>
-        /// Create/Persit new book record into the Db
+        /// Create new book
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
         public async Task<bool> createBook(Books req)
         {
-            var response = false; 
+            var response = false;
             try
             {
-                if (req==null)
+                if (req == null)
                 {
                     response = false;
                     return response;
                 }
-                _dbContext.Books.Add(req);
-                if (await _dbContext.SaveChangesAsync()>0)
-                {
-                    response = true;
-                    return response;
-                }
+               var res=await  _repo.createBook(req);
+
+                response = res;
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
             return false;
         }
@@ -64,32 +54,14 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// <param name="bookTitle"></param>
         /// <param name="author"></param>
         /// <returns></returns>
-        public async Task<bool> updateBookRecord (int bookId, string bookName, string bookTitle, string author)
+        public async Task<bool> updateBookRecord(int bookId, string bookName, string bookTitle, string author)
         {
             var response = false;
             try
             {
                 if (bookId != 0)
                 {
-                    var getBook = (from x in _dbContext.Books where x.id == bookId select x).FirstOrDefault();
-                    if (getBook==null)
-                    {
-                        response= false;
-                        return response;
-                    }
-
-
-
-                    //update object with supplied parameters
-                    getBook.bookName = bookName;
-                    getBook.bookTitle = bookTitle;
-                    getBook.BookAuthor = author;
-
-                    var save = await _dbContext.SaveChangesAsync();
-                    if (save>0)
-                    {
-                        response = true;
-                    }
+                response= await _repo.updateBookRecord(bookId, bookName, bookTitle, author);
 
                 }
 
@@ -97,13 +69,13 @@ namespace Vatebra.DataAccessLayer.Repositories
             catch (Exception ex)
             {
 
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
         }
 
-  
+
         /// <summary>
         /// Add More Book copies of a particular book provided id is supplied
         /// </summary>
@@ -113,27 +85,17 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// <param name="description"></param>
         /// <param name="versionTitle"></param>
         /// <returns></returns>
-        public async Task <bool> addBookCopies(int bookId, string yearPublished, string bookAbstract, string description, string versionTitle)
+        public async Task<bool> addBookCopies(int bookId, string yearPublished, string bookAbstract, string description, string versionTitle)
         {
             var response = new bool();
             try
             {
-                var result = (from x in _dbContext.Books where x.id == bookId select x).FirstOrDefault();
-                if (result!=null)
-                {
-
-                   _dbContext.BookCopies.Add(new BookCopies { bookAbstract = bookAbstract, description = description, versionTitle = versionTitle, yearPublished = yearPublished, Books=result });
-                    if (await _dbContext.SaveChangesAsync()>0)
-                    {
-                        response = true;
-                        return response;
-                    }
-                }
+               response = await _repo.addBookCopies(bookId, yearPublished, bookAbstract, description, versionTitle);
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
@@ -144,19 +106,17 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public async Task <List<Books>> getBooks(int count=10)
+        public async Task<List<Books>> getBooks(int count = 10)
         {
-            var response =new  List<Books>();
+            var response = new List<Books>();
             try
             {
-                var result = (from x in _dbContext.Books select x).Take(count).ToList();
-                response = result;
-                //return response;
+                response = await _repo.getBooks(count);
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
@@ -168,19 +128,18 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// <param name="bookid"></param>
         /// <returns></returns>
 
-        public async Task<Books> getBook(int bookid=0)
+        public async Task<Books> getBook(int bookid = 0)
         {
             var response = new Books();
             try
             {
-                var result = (from x in _dbContext.Books where x.id == bookid select x).FirstOrDefault();
-                response = result;
+                response = await _repo.getBook(bookid);
 
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
@@ -195,21 +154,20 @@ namespace Vatebra.DataAccessLayer.Repositories
             var response = new List<BooksBorrowed>();
             try
             {
-                var result = (from x in _dbContext.BooksBorrowed select x).ToList();
-                response = result;
+                response = await _repo.getbooksBorrowed();
 
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
         }
 
+
         /// <summary>
-        /// fetch all books borrowed that are overdue
+        /// fetch all books borrowed that are over due
         /// </summary>
         /// <returns></returns>
         public async Task<List<BooksBorrowed>> getbooksBorrowedOverDue()
@@ -217,14 +175,11 @@ namespace Vatebra.DataAccessLayer.Repositories
             var response = new List<BooksBorrowed>();
             try
             {
-                var result = (from x in _dbContext.BooksBorrowed where x.dueReturnedDate.Date>DateTime.Today.Date select x).ToList();
-                response = result;
-
+                response = await _repo.getbooksBorrowedOverDue();
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
@@ -235,19 +190,17 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<BooksBorrowed> getbookBorrowed(int id=0)
+        public async Task<BooksBorrowed> getbookBorrowed(int id = 0)
         {
             var response = new BooksBorrowed();
             try
             {
-                var result = (from x in _dbContext.BooksBorrowed where x.id == id select x).FirstOrDefault();
-                response = result;
+                response =await  _repo.getbookBorrowed(id);
 
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
@@ -263,16 +216,17 @@ namespace Vatebra.DataAccessLayer.Repositories
             var response = string.Empty;
             try
             {
-                var result = (from x in _dbContext.BooksBorrowed where x.dateBorrowed.Date == DateTime.Today.Date select x.books.BookSubscriptionDetails.Amount).Sum();
+                var result = (from x in _repo.BooksBorrowed where x.dateBorrowed.Date == DateTime.Today.Date select x.books.BookSubscriptionDetails.Amount).Sum();
                 response = result.ToString();
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                _logger.LogError("Error Has occured", ex);
             }
 
             return response;
         }
     }
 }
+

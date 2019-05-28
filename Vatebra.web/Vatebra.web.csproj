@@ -28,6 +28,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\Vatebra.core\Vatebra.core.csproj" />
     <ProjectReference Include="..\Vatebra.DataAccessLayer\Vatebra.DataAccessLayer.csproj" />
   </ItemGroup>
 
