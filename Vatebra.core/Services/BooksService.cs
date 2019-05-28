@@ -216,8 +216,7 @@ namespace Vatebra.core.Services
             var response = string.Empty;
             try
             {
-                var result = (from x in _repo.BooksBorrowed where x.dateBorrowed.Date == DateTime.Today.Date select x.books.BookSubscriptionDetails.Amount).Sum();
-                response = result.ToString();
+                response =await _repo.getTotalRevenue();
             }
             catch (Exception ex)
             {
