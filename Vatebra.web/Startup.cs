@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using Vatebra.DataAccessLayer.Dbcontext;
 
 namespace Vatebra.web
 {
@@ -34,6 +34,11 @@ namespace Vatebra.web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var cxn = Configuration["Dbcxn"].ToString();//configuration string
+
+            services.AddDbContext<VatebraDbContext>(options =>
+             options.UseSqlServer(cxn)
+             .UseLazyLoadingProxies());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
