@@ -17,12 +17,13 @@ namespace Vatebra.web
 {
     public class Startup
     {
+        public readonly IConfiguration Configuration;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+       
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,8 +35,9 @@ namespace Vatebra.web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            var cxn = Configuration["Dbcxn"].ToString();//configuration string
-
+            /* var cxn = Configuration["Dbcxn"].ToString();/*////configuration string
+            var conect = Configuration;
+            var cxn = Configuration["DbconnectionString"].ToString();
             services.AddDbContext<VatebraDbContext>(options =>
              options.UseSqlServer(cxn)
              .UseLazyLoadingProxies());
