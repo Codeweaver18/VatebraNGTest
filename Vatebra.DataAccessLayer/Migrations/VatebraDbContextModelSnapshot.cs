@@ -39,7 +39,7 @@ namespace Vatebra.DataAccessLayer.Migrations
 
                     b.Property<string>("versionTitle");
 
-                    b.Property<string>("yearPublished");
+                    b.Property<DateTime>("yearPublished");
 
                     b.HasKey("id");
 

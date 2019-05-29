@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Vatebra.DataAccessLayer.Migrations
 {
-    public partial class initialVatebraMigrations : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,7 +71,7 @@ namespace Vatebra.DataAccessLayer.Migrations
                     dateModified = table.Column<DateTime>(nullable: false),
                     isActive = table.Column<bool>(nullable: false),
                     bookId = table.Column<int>(nullable: true),
-                    yearPublished = table.Column<string>(nullable: true),
+                    yearPublished = table.Column<DateTime>(nullable: false),
                     bookAbstract = table.Column<string>(nullable: true),
                     description = table.Column<string>(nullable: true),
                     versionTitle = table.Column<string>(nullable: true)

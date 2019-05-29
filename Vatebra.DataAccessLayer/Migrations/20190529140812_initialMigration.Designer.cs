@@ -10,8 +10,8 @@ using Vatebra.DataAccessLayer.Dbcontext;
 namespace Vatebra.DataAccessLayer.Migrations
 {
     [DbContext(typeof(VatebraDbContext))]
-    [Migration("20190528151759_initialVatebraMigrations")]
-    partial class initialVatebraMigrations
+    [Migration("20190529140812_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,7 +41,7 @@ namespace Vatebra.DataAccessLayer.Migrations
 
                     b.Property<string>("versionTitle");
 
-                    b.Property<string>("yearPublished");
+                    b.Property<DateTime>("yearPublished");
 
                     b.HasKey("id");
 
