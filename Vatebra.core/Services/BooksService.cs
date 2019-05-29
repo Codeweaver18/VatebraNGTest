@@ -11,8 +11,9 @@ namespace Vatebra.core.Services
     public class BooksService
     {
         private readonly BooksRepository _repo;
-        private readonly ILogger _logger;
-        public BooksService(BooksRepository repo, ILogger logger)
+  
+        private readonly ILogger<BooksService> _logger;
+        public BooksService(BooksRepository repo,ILogger<BooksService> logger)
         {
             _repo = repo;
             _logger = logger;

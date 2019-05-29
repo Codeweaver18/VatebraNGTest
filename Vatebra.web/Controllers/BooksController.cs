@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Vatebra.core.Services;
+using Vatebra.DataAccessLayer.Entities;
 using Vatebra.web.ViewModels;
 
 namespace Vatebra.web.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly BooksService _bookService;
+       
         private readonly ILogger<BooksController> _logger;
+        private readonly BooksService _bookService;
 
         public BooksController(ILogger<BooksController> logger, BooksService booksService)
         {
@@ -25,7 +27,8 @@ namespace Vatebra.web.Controllers
         /// </summary>
         /// <param name="vm"></param>
         /// <returns></returns>
-        [AutoValidateAntiforgeryToken]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> CreateBooks(BookViewModel vm)
         {
 
@@ -33,7 +36,13 @@ namespace Vatebra.web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await _bookService.createBook(new DataAccessLayer.Entities.Books { BookAuthor = vm.BookAuthor, bookName = vm.bookName, bookTitle = vm.bookTitle });
+
+                    var result =await _bookService.createBook(new DataAccessLayer.Entities.Books { BookAuthor = vm.BookAuthor, bookName = vm.bookName, bookTitle = vm.bookTitle });
+                    if (result)
+                    {
+                        _logger.LogInformation("New Book has been Created with");
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -44,7 +53,6 @@ namespace Vatebra.web.Controllers
             }
 
             return View();
-
 
         }
 
@@ -63,9 +71,25 @@ namespace Vatebra.web.Controllers
         }
 
 
-
-        public IActionResult ViewBooks()
+        /// <summary>
+        /// Get List of all books in the system
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> ViewBooks()
         {
+            var response = new List<Books>();
+            try
+            {
+                var result = await _bookService.getBooks();
+              
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+                return StatusCode(500, ex.Message);
+            }
+
             return View();
         }
         public IActionResult BorrowedBooks()
