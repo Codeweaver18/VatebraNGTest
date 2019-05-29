@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@using Vatebra.core.Services;
+@inject BooksService _bookService;
+@{ 
+    var revenue =await  _bookService.getTotalRevenue();
+    var books =await _bookService.getbooksBorrowed();
+}
+
+    <div>
+        <h1>Total number of borrowed books today</h1>
+        <br />
+        <strong>@books.Count.ToString()</strong>
+        <h1>Total Amount Earned Today from Borrowing books</h1>
+        <br />
+        <strong>@revenue</strong>
+    </div>

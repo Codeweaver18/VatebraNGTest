@@ -22,6 +22,12 @@ namespace Vatebra.web.Controllers
             _bookService = booksService;
         }
 
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Create Instance of a new book
         /// </summary>
