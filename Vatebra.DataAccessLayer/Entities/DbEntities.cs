@@ -17,7 +17,7 @@ namespace Vatebra.DataAccessLayer.Entities
     public class Footballers : BaseEntity
     {
         [ForeignKey("TeamId")]
-        public Team Team { get; set; }
+        public virtual Team Team { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
         public string Email { get; set; }
@@ -42,10 +42,10 @@ namespace Vatebra.DataAccessLayer.Entities
     {
 
         [ForeignKey("FootballersId")]
-        public  Footballers Footballers { get; set; }
+        public virtual Footballers Footballers { get; set; }
 
         [ForeignKey("MatchId")]
-        public Match  Match{ get; set; }
+        public virtual Match  Match{ get; set; }
 
      
         public string goalDescription{ get; set; }

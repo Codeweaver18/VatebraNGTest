@@ -77,7 +77,7 @@ namespace Vatebra.core.Services
 
 
         /// <summary>
-        /// Add More Book copies of a particular book provided id is supplied
+        /// Add More Book copies of a particular book provided {id} is supplied
         /// </summary>
         /// <param name="bookId"></param>
         /// <param name="yearPublished"></param>
