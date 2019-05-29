@@ -229,6 +229,22 @@ namespace Vatebra.core.Services
 
             return response;
         }
+
+        public async Task<bool> deletebookbyId(int id)
+        {
+            var response = false;
+            try
+            {
+                var result = await _repo.deleteBookById(id);
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError("Error Has occured", ex);
+            }
+
+            return response;
+        }
     }
 }
 

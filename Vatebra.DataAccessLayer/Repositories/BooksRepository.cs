@@ -302,5 +302,33 @@ namespace Vatebra.DataAccessLayer.Repositories
 
             return response;
         }
+
+        /// <summary>
+        /// delete/detach/remove a book entity by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<bool> deleteBookById(int id)
+        {
+            var response = false;
+            try
+            {
+                var bookid = (from x in _dbContext.Books where x.id == id select x).FirstOrDefault();
+                _dbContext.Books.Remove(bookid);
+                var result= await _dbContext.SaveChangesAsync();
+                if (result>0)
+                {
+                    response = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return response;
+        }
     }
 }

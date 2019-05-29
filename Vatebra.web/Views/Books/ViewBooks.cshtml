@@ -80,9 +80,9 @@
             </td>
             <td>
                 @Html.ActionLink("Update Book", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("More Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("More Details", "viewBooksDetails", new { id=item.id}) |
                 @Html.ActionLink("Delete Book", "Delete", new { /* id=item.PrimaryKey */ })
-                @Html.ActionLink("More Copies", "viewBooksDetails", new { id=item.id})
+           
             </td>
         </tr>
         }

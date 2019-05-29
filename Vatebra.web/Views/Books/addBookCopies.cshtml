@@ -5,7 +5,7 @@
     var id = int.Parse(ViewData["addBookCopiesId"].ToString());
 }
 
-<h1>Add More Copies to your </h1>
+<h1>Add More Copies to your Book</h1>
 
 
 <hr />
@@ -45,14 +45,14 @@
 
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Add Copy" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Back to view Details", "viewBooksDetails", new { id =id })
 </div>
 
 @section Scripts {

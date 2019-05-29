@@ -94,7 +94,7 @@ namespace Vatebra.web.Controllers
             try
             {
                 ViewData["viewBookId"] = id;
-              
+                _logger.LogInformation("Logged Books Id::"+id);
 
             }
             catch (Exception ex)
