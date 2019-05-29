@@ -27,7 +27,7 @@ namespace Vatebra.core.Services
        /// <param name="subscriptionDescription"></param>
        /// <param name="subscriptionAmount"></param>
        /// <returns></returns>
-        public async Task<bool> createBook(Books req, string subscriptionDescription, Decimal subscriptionAmount = 0)
+        public async Task<bool> createBook(Books req, string subscriptionDescription, DateTime yearPublished, string bookAbstract, string versionTitle, decimal subscriptionAmount = 0)
         {
             var response = false;
             try
@@ -37,7 +37,7 @@ namespace Vatebra.core.Services
                     response = false;
                     return response;
                 }
-               var res=await  _repo.createBook(req,subscriptionDescription, subscriptionAmount);
+               var res=await  _repo.createBook(req,subscriptionDescription,  yearPublished, bookAbstract, versionTitle, subscriptionAmount);
 
                 response = res;
             }
@@ -88,7 +88,7 @@ namespace Vatebra.core.Services
         /// <param name="description"></param>
         /// <param name="versionTitle"></param>
         /// <returns></returns>
-        public async Task<bool> addBookCopies(int bookId, string yearPublished, string bookAbstract, string description, string versionTitle)
+        public async Task<bool> addBookCopies(int bookId, DateTime yearPublished, string bookAbstract, string description, string versionTitle)
         {
             var response = new bool();
             try

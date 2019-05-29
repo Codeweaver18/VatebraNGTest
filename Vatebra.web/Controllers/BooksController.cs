@@ -37,7 +37,7 @@ namespace Vatebra.web.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    var result = await _bookService.createBook(new DataAccessLayer.Entities.Books { BookAuthor = vm.BookAuthor, bookName = vm.bookName, bookTitle = vm.bookTitle }, vm.Description, vm.Amount);
+                    var result = await _bookService.createBook(new DataAccessLayer.Entities.Books { BookAuthor = vm.BookAuthor, bookName = vm.bookName, bookTitle = vm.bookTitle }, vm.Description,vm.yearPublished, vm.bookAbstract, vm.versionTitle, vm.Amount);
                     if (result)
                     {
                         _logger.LogInformation("New Book has been Created with");

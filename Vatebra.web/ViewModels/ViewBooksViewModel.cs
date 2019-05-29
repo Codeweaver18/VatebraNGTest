@@ -28,5 +28,9 @@ namespace Vatebra.web.ViewModels
 
         [Display(Name = "Amount")]
         public decimal Amount { get; set; }
+
+
+        [Display(Name = "Total Copies")]
+        public int copies { get; set; }
     }
 }
