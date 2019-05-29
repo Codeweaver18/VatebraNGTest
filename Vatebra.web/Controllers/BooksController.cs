@@ -84,6 +84,11 @@ namespace Vatebra.web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// View all the details of a book
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> viewBooksDetails(int id=0)
         {
             try
@@ -101,6 +106,58 @@ namespace Vatebra.web.Controllers
 
             return View();
         }
+
+
+        /// <summary>
+        /// Add more copies of a particular book {bookId}
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async  Task<IActionResult> addBookCopies (addBookCopiesViewModel vm, int id = 0)
+        {
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                ViewData["ViewBookMessageError"] = ex.Message;
+                _logger.LogError(ex, "An Error has occured", ex.Message);
+            }
+
+
+            return View();
+        }
+
+        /// <summary>
+        /// Get the 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> addBookCopies(int id = 0)
+        {
+
+            try
+            {
+                ViewData["addBookCopiesId"] = id;
+            }
+            catch (Exception ex)
+            {
+
+                ViewData["ViewBookMessageError"] = ex.Message;
+                _logger.LogError(ex, "An Error has occured", ex.Message);
+            }
+
+
+            return View();
+        }
+
         /// <summary>
         /// Get More Details of a ParticularBook such as copies available, subscription etc
         /// </summary>

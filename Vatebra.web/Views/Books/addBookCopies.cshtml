@@ -1,0 +1,54 @@
+﻿@model Vatebra.web.ViewModels.addBookCopiesViewModel
+
+@{
+    ViewData["Title"] = "addBookCopies";
+    var id = int.Parse(ViewData["addBookCopiesId"].ToString());
+}
+
+<h1>Add More Copies to your </h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="addBookCopies" asp-antiforgery="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="yearPublished" class="control-label"></label>
+                <input asp-for="yearPublished" class="form-control" />
+                <span asp-validation-for="yearPublished" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="bookAbstract" class="control-label"></label>
+                <input asp-for="bookAbstract" class="form-control" />
+                <span asp-validation-for="bookAbstract" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="versionTitle" class="control-label"></label>
+                <input asp-for="versionTitle" class="form-control" />
+                <span asp-validation-for="versionTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+              
+                <input  type="hidden" name="bookId" id="bookId" value="@id"/>
+               
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
