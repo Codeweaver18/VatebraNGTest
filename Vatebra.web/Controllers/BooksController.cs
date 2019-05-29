@@ -12,7 +12,7 @@ namespace Vatebra.web.Controllers
     public class BooksController : Controller
     {
         private readonly BooksService _bookService;
-        private readonly ILogger _logger;
+        private readonly ILogger<BooksController> _logger;
 
         public BooksController(ILogger<BooksController> logger, BooksService booksService)
         {
