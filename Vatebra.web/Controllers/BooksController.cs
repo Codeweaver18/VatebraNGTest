@@ -220,19 +220,46 @@ namespace Vatebra.web.Controllers
 
             return View();
         }
-
+        /// <summary>
+        /// get list of all borrowed books
+        /// </summary>
+        /// <returns></returns>
         public IActionResult BorrowedBooks()
         {
             return View();
         }
-        public IActionResult OverdueBorrowedDate()
+
+
+        [HttpGet]
+        public async Task<IActionResult> borrowBooks()
+        {
+            
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> borrowBooks(borowbookViewModel vm)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+                StatusCode(500, ex.Message);
+                return View();
+            }
+
+            return View();
+        }
+        
+
+        public IActionResult AdminView()
         {
             return View();
         }
-        public IActionResult TodayRevenue()
-        {
-            return View();
-        }
-       
     }
 }
