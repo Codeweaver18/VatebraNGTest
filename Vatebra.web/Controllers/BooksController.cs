@@ -213,7 +213,7 @@ namespace Vatebra.web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+                _logger.LogError(ex, "An Error has occured");
                 StatusCode(500, ex.Message);
                 return View();
             }
@@ -238,6 +238,30 @@ namespace Vatebra.web.Controllers
             return View();
         }
 
+
+
+       
+        public async Task<IActionResult> ListBorrowedBooks()
+        {
+
+            try
+            {
+                //this  logic will be handled from the razor page view;
+            }
+            catch (Exception ex)
+            {
+
+
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+                return View();
+            }
+
+            return View();
+            
+        }
+
+
         /// <summary>
         /// Borrow books from the library
         /// </summary>
@@ -246,22 +270,24 @@ namespace Vatebra.web.Controllers
         [HttpPost]
         public async Task<IActionResult> borrowBooks(borowbookViewModel vm)
         {
+            //TODO: check  for model state validation in real case
             try
             {
-              var book = _bookService.getBook(int.Parse(vm.bookid));
+              var book = await _bookService.getBook(int.Parse(vm.bookid));
               if (book==null)
                 {
                     return View();
                     //ToDO:: add view Data error mesage here
                 }
 
-                var result = _bookService.borrowBooks(new BooksBorrowed { ApprovedById = string.Empty, books = book, comments = vm.comments, dateBorrowed = vm.dateBorrowed, dueReturnedDate = vm.dueReturnedDate });//in an ideal situation, i prefer to use automapper;
-
+                var result = await _bookService.borrowBooks(new BooksBorrowed { ApprovedById = string.Empty, books = book, comments = vm.comments, dateBorrowed = vm.dateBorrowed, dueReturnedDate = vm.dueReturnedDate });//in an ideal situation, i prefer to use automapper;
+                _logger.LogInformation("Book with id has been borrowed::" + vm.bookid);
+                return RedirectToAction("ListBorrowedBooks");
             }
             catch (Exception ex)
             {
 
-                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+                _logger.LogError(ex, "An Error has occured");
                 StatusCode(500, ex.Message);
                 return View();
             }

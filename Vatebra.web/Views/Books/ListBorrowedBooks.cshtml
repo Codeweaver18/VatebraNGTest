@@ -1,0 +1,63 @@
+﻿@using Vatebra.core.Services;
+@inject BooksService _bookService;
+@model IEnumerable<Vatebra.web.ViewModels.ListBorrowViewModel>
+
+@{
+    ViewData["Title"] = "ListBorrowedBooks";
+    var borrowedbooks = await _bookService.getbooksBorrowed();
+}
+
+<h1>List of borrowed books </h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Date Borrowed
+            </th>
+            <th>
+                Due Return Date
+            </th>
+            <th>
+                Comments
+            </th>
+            <th>Is Overdue</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+
+            if (borrowedbooks != null)
+            {
+                foreach (var item in borrowedbooks)
+                {
+                <tr>
+                    <td>@item.dateBorrowed</td>
+                    <td>@item.dueReturnedDate</td>
+                    <td>@item.comments</td>
+
+                    @{
+                               
+                                var dateresult = DateTime.Compare(item.dueReturnedDate.Date, DateTime.Now.Date);
+
+                                if (dateresult<0)
+                                {
+                        <td class="text-danger">Over Due</td>
+                        }
+
+                     if (dateresult>=0)
+                        {
+                        <td class="text-success">Not Due</td>
+                            }
+                        }
+                </tr>
+
+                    }
+
+                }
+       }
+        </tbody>
+</table>
