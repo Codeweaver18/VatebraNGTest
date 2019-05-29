@@ -77,11 +77,25 @@ namespace Vatebra.web.Controllers
         /// <returns></returns>
         public async Task<IActionResult> ViewBooks()
         {
-            var response = new List<Books>();
+          
+
+            return View();
+        }
+
+
+        /// <summary>
+        /// Get More Details of a ParticularBook such as copies available, subscription etc
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> ViewBook(int bookId=0)
+        {
+            var response = new Books();
             try
             {
-                var result = await _bookService.getBooks();
-              
+                var result = await _bookService.getBook(bookId);
+                
+
             }
             catch (Exception ex)
             {
@@ -90,8 +104,9 @@ namespace Vatebra.web.Controllers
                 return StatusCode(500, ex.Message);
             }
 
-            return View();
+            return View(response);
         }
+
         public IActionResult BorrowedBooks()
         {
             return View();

@@ -27,11 +27,11 @@ namespace Vatebra.DataAccessLayer.Repositories
 
 
         /// <summary>
-        /// Create/Persit new book record into the Db
+        /// Create/Persit new book record into the Db and also add it type of subscription
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        public async Task<bool> createBook(Books req)
+        public async Task<bool> createBook(Books req, string subscriptionDescription, int subscriptionAmount = 0)
         {
             var response = false; 
             try
@@ -44,8 +44,30 @@ namespace Vatebra.DataAccessLayer.Repositories
                 _dbContext.Books.Add(req);
                 if (await _dbContext.SaveChangesAsync()>0)
                 {
-                    response = true;
-                    return response;
+                    //create subscription for the books
+                    var bookSub = new BookSubscriptionDetails();
+                    bookSub.Description = subscriptionDescription;
+                    bookSub.Books = req;
+                    bookSub.Amount = subscriptionAmount;
+                    if (subscriptionAmount>0)
+                    {
+                        bookSub.isfree = "NO";
+                    }
+
+                    else if (subscriptionAmount<=0)
+                    {
+                        bookSub.isfree = "YES";
+                            
+                    }
+                    _dbContext.BookSubscriptionDetails.Add(bookSub);
+
+                    if (await _dbContext.SaveChangesAsync()>0)
+                    {
+                        response = true;
+                        return response;
+                    }
+
+                  
                 }
             }
             catch (Exception ex)

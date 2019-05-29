@@ -33,4 +33,9 @@
     <ProjectReference Include="..\Vatebra.DataAccessLayer\Vatebra.DataAccessLayer.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Views\Books\" />
+  </ItemGroup>
+
 </Project>

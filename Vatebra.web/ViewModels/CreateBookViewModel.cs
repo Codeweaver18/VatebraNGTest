@@ -6,16 +6,27 @@ using System.Threading.Tasks;
 
 namespace Vatebra.web.ViewModels
 {
-    public class BookViewModel
+    public class CreateBookViewModel
     {
         [Required]
-        [Display(Name ="Name")]
+        [Display(Name = "Name")]
         public string bookName { get; set; }
+
         [Required]
         [Display(Name = "Title")]
         public string bookTitle { get; set; }
+
         [Required]
         [Display(Name = "Author")]
         public string BookAuthor { get; set; }
+
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+
+        [Required]
+        [Display(Name = "Amount")]
+        public decimal Amount { get; set; }
     }
 }

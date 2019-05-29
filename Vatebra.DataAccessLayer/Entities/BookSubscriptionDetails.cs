@@ -8,7 +8,7 @@ namespace Vatebra.DataAccessLayer.Entities
 {
    public class BookSubscriptionDetails:BaseEntity
     {
-        //BookId,Description, isfree, isPaid, Amount, datepbrorowed
+       
         [ForeignKey("bookId")]
         public virtual Books Books { get; set; }
         public string Description { get; set; }

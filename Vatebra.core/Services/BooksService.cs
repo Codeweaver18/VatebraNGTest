@@ -25,7 +25,7 @@ namespace Vatebra.core.Services
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        public async Task<bool> createBook(Books req)
+        public async Task<bool> createBook(Books req, string subscriptionDescription, int subscriptionAmount = 0)
         {
             var response = false;
             try
@@ -35,7 +35,7 @@ namespace Vatebra.core.Services
                     response = false;
                     return response;
                 }
-               var res=await  _repo.createBook(req);
+               var res=await  _repo.createBook(req,subscriptionDescription, subscriptionAmount);
 
                 response = res;
             }

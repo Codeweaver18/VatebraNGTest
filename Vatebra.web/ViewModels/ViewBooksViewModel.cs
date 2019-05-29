@@ -9,14 +9,24 @@ namespace Vatebra.web.ViewModels
     public class ViewBooksViewModel
     {
 
-        [Required]
+       
         [Display(Name = "Name")]
         public string bookName { get; set; }
-        [Required]
+
+       
         [Display(Name = "Title")]
         public string bookTitle { get; set; }
-        [Required]
+
         [Display(Name = "Author")]
         public string BookAuthor { get; set; }
+
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+        [Display(Name = "Subscription Status")]
+        public string isfree { get; set; }
+
+        [Display(Name = "Amount")]
+        public decimal Amount { get; set; }
     }
 }
