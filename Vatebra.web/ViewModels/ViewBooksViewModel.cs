@@ -23,7 +23,7 @@ namespace Vatebra.web.ViewModels
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        [Display(Name = "Subscription Status")]
+        [Display(Name = "Free Subscription ?")]
         public string isfree { get; set; }
 
         [Display(Name = "Amount")]

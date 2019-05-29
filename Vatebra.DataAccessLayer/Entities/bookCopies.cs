@@ -10,7 +10,7 @@ namespace Vatebra.DataAccessLayer.Entities
         //Bookid, yearPublished, abstract, description, versionCopyName
         [ForeignKey("bookId")]
         public virtual Books Books { get; set; }
-        public string yearPublished { get; set; }
+        public DateTime yearPublished { get; set; }
         public string bookAbstract { get; set; }
         public string description{ get; set; }
         public string versionTitle { get; set; }

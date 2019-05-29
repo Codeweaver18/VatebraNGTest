@@ -32,7 +32,7 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        public async Task<bool> createBook(Books req, string subscriptionDescription,Decimal subscriptionAmount = 0)
+        public async Task<bool> createBook(Books req, string subscriptionDescription, DateTime yearPublished, string bookAbstract, string versionTitle, decimal subscriptionAmount = 0)
         {
             var response = false; 
             try
@@ -64,6 +64,9 @@ namespace Vatebra.DataAccessLayer.Repositories
 
                     if (await _dbContext.SaveChangesAsync()>0)
                     {
+                        //create copies of the book
+                        _dbContext.BookCopies.Add(new BookCopies {Books=req, bookAbstract=bookAbstract, description=subscriptionDescription, versionTitle=versionTitle, yearPublished=yearPublished});
+
                         response = true;
                         return response;
                     }
@@ -137,7 +140,7 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// <param name="description"></param>
         /// <param name="versionTitle"></param>
         /// <returns></returns>
-        public async Task <bool> addBookCopies(int bookId, string yearPublished, string bookAbstract, string description, string versionTitle)
+        public async Task <bool> addBookCopies(int bookId, DateTime yearPublished, string bookAbstract, string description, string versionTitle)
         {
             var response = new bool();
             try

@@ -24,9 +24,21 @@ namespace Vatebra.web.ViewModels
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-
         [Required]
         [Display(Name = "Amount")]
         public decimal Amount { get; set; }
+
+        [Required]
+        [Display(Name = "Year Published")]
+        [DataType(DataType.Date)]
+        public DateTime yearPublished { get; set; }
+
+        [Required]
+        [Display(Name = "Books Abstract")]
+        public string bookAbstract { get; set; }
+      
+        [Required]
+        [Display(Name = "Version Title")]
+        public string versionTitle { get; set; }
     }
 }

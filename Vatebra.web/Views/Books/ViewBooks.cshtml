@@ -1,22 +1,20 @@
-﻿@using  Vatebra.core.Services;
+﻿@using Vatebra.core.Services;
 @inject BooksService _bookService;
-
+@model Vatebra.web.ViewModels.ViewBooksViewModel;
 
 @{
     ViewData["Title"] = "ViewBooks";
 
 }
 @{
+    var books = await _bookService.getBooks();
 
-    
 }
-
-<h1>ViewBooks</h1>
 
 <p>
     <a asp-action="Create">View all Books in Inventory</a>
 </p>
-@*<table class="table">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -41,33 +39,45 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in books)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.bookName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.bookTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookAuthor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.isfree)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookAuthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.Description)
+            </td>
+            @{
+                if (item.BookSubscriptionDetails.isfree == "YES")
+                {
+                    <td class="text-success">
+                        @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.isfree)
+                    </td>
+                }
+
+               else if (item.BookSubscriptionDetails.isfree == "NO")
+                {
+                    <td class="text-danger">
+                        @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.isfree)
+                    </td>
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
         }
     </tbody>
-</table>*@
+</table>
