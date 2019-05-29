@@ -41,6 +41,7 @@ namespace Vatebra.web.Controllers
                     if (result)
                     {
                         _logger.LogInformation("New Book has been Created with");
+                        ViewData["CreateBookMessage"] = "New Book has been created successfully";//TODO: Make all this literals to enums to avoid too much strings
 
                     }
                 }

@@ -106,6 +106,7 @@ namespace Vatebra.DataAccessLayer.Repositories
                     getBook.bookName = bookName;
                     getBook.bookTitle = bookTitle;
                     getBook.BookAuthor = author;
+                    getBook.dateModified = DateTime.Now;
 
                     var save = await _dbContext.SaveChangesAsync();
                     if (save>0)
