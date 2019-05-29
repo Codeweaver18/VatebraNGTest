@@ -116,12 +116,23 @@ namespace Vatebra.web.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async  Task<IActionResult> addBookCopies (addBookCopiesViewModel vm, int id = 0)
+        public async  Task<IActionResult> addBookCopies (addBookCopiesViewModel vm)
         {
 
             try
             {
+                var result =await  _bookService.addBookCopies(int.Parse(vm.bookId), vm.yearPublished, vm.bookAbstract, vm.description, vm.versionTitle);
+                if (result)
+                {
+                    ViewData["addBookCopiesSuccess"] = "Book Copoies has been added successfully";
 
+                    return RedirectToAction("viewBooksDetails", new { id = int.Parse(vm.bookId) });
+                }
+
+                else if (!result)
+                {
+                    ViewData["addBookCopiesError"] = "Oops an error has occured";
+                }
             }
             catch (Exception ex)
             {
