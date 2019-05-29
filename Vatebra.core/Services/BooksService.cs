@@ -46,7 +46,7 @@ namespace Vatebra.core.Services
 
                 _logger.LogError("Error Has occured", ex);
             }
-            return false;
+            return response;
         }
 
         /// <summary>

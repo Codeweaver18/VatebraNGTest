@@ -51,7 +51,7 @@ namespace Vatebra.web.Controllers
             {
                 ViewData["CreateBookMessageError"] = ex.Message;
                 _logger.LogError(ex, "An Error has occured, Test May Not be created");
-                return StatusCode(500, ex.Message);
+            
             }
 
             return View();

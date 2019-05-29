@@ -80,7 +80,7 @@ namespace Vatebra.DataAccessLayer.Repositories
 
                 throw ex;
             }
-            return false;
+            return response;
         }
 
         /// <summary>
