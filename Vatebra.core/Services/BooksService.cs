@@ -256,6 +256,32 @@ namespace Vatebra.core.Services
 
             return response;
         }
+
+        /// <summary>
+        /// persist book borrowing operation to the database
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public async Task<bool> borrowBooks(BooksBorrowed req)
+        {
+            var response = false;
+            try
+            {
+                var result = await _repo.borrowBooks(req);
+                if (result)
+                {
+                    result = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError("Error Has occured", ex);
+            }
+
+            return response;
+        }
     }
 }
 
