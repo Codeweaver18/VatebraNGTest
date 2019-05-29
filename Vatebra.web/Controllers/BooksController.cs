@@ -84,7 +84,23 @@ namespace Vatebra.web.Controllers
             return View();
         }
 
+        public async Task<IActionResult> viewBooksDetails(int id=0)
+        {
+            try
+            {
+                ViewData["viewBookId"] = id;
+              
 
+            }
+            catch (Exception ex)
+            {
+
+                ViewData["ViewBookMessageError"] = ex.Message;
+                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+            }
+
+            return View();
+        }
         /// <summary>
         /// Get More Details of a ParticularBook such as copies available, subscription etc
         /// </summary>

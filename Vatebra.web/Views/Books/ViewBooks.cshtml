@@ -35,6 +35,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.copies)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -62,7 +65,7 @@
                     </td>
                 }
 
-               else if (item.BookSubscriptionDetails.isfree == "NO")
+                else if (item.BookSubscriptionDetails.isfree == "NO")
                 {
                     <td class="text-danger">
                         @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.isfree)
@@ -73,9 +76,13 @@
                 @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.Amount)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+              @item.bookCopies.Count.ToString()
+            </td>
+            <td>
+                @Html.ActionLink("Update Details", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("More Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete Book", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Add Copies", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
         }

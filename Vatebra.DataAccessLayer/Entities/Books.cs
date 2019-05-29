@@ -12,7 +12,7 @@ namespace Vatebra.DataAccessLayer.Entities
         public string bookName { get; set; }
         public string bookTitle { get; set; }
         public string BookAuthor { get; set; }
-        public virtual IEnumerable<BookCopies> bookCopies { get; set; }
+        public virtual List<BookCopies> bookCopies { get; set; }
         public virtual BookSubscriptionDetails BookSubscriptionDetails { get; set; }
 
     }

@@ -31,6 +31,6 @@ namespace Vatebra.web.ViewModels
 
 
         [Display(Name = "Total Copies")]
-        public int copies { get; set; }
+        public string copies { get; set; }
     }
 }
