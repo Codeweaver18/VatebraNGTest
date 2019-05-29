@@ -187,10 +187,37 @@ namespace Vatebra.web.Controllers
             {
 
                 _logger.LogError(ex, "An Error has occured, Test May Not be created");
-                return StatusCode(500, ex.Message);
+                StatusCode(500, ex.Message);
+                return View();
             }
 
             return View(response);
+        }
+
+        /// <summary>
+        /// Delete a book from database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> deleteBooks(int id)
+        {
+            try
+            {
+                var result =await _bookService.deletebookbyId(id);
+                if (result)
+                {
+                    _logger.LogInformation("Book has been deleted with ID::=>"+id);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+                StatusCode(500, ex.Message);
+                return View();
+            }
+
+            return View();
         }
 
         public IActionResult BorrowedBooks()

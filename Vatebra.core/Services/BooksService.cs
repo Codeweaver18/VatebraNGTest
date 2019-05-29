@@ -230,12 +230,23 @@ namespace Vatebra.core.Services
             return response;
         }
 
+        /// <summary>
+        /// delete a book from the invventory witht the supplied id {id}
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> deletebookbyId(int id)
         {
             var response = false;
             try
             {
                 var result = await _repo.deleteBookById(id);
+                if (result)
+                {
+                    _logger.LogError("Book has been deleted with ID:::"+id);
+                    response = true;
+                }
+            
             }
             catch (Exception ex)
             {
