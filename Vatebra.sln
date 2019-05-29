@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vatebra.web", "Vatebra.web\Vatebra.web.csproj", "{E7B31164-C934-4BCB-B05F-67F176BC96D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vatebra.web", "Vatebra.web\Vatebra.web.csproj", "{E7B31164-C934-4BCB-B05F-67F176BC96D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vatebra.core", "Vatebra.core\Vatebra.core.csproj", "{6808E5C9-2358-4AEF-A26C-6B150AB6C5BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vatebra.core", "Vatebra.core\Vatebra.core.csproj", "{6808E5C9-2358-4AEF-A26C-6B150AB6C5BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLLS", "DLLS", "{E54CDE56-425C-423B-8580-BC2D0956BE08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vatebra.DataAccessLayer", "Vatebra.DataAccessLayer\Vatebra.DataAccessLayer.csproj", "{0E445473-ED28-4F4F-9C10-745977CAE324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vatebra.DataAccessLayer", "Vatebra.DataAccessLayer\Vatebra.DataAccessLayer.csproj", "{0E445473-ED28-4F4F-9C10-745977CAE324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vatebra.common", "Vatebra.common\Vatebra.common.csproj", "{9CCB1040-A399-4904-9AB8-E8EAD395519D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vatebra.common", "Vatebra.common\Vatebra.common.csproj", "{9CCB1040-A399-4904-9AB8-E8EAD395519D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Testing", "Unit Testing", "{FF8D8ECD-EAB8-433C-B635-422774C5C469}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTesting", "ServiceTesting\ServiceTesting.csproj", "{01C4EE6E-654C-44B2-A92E-EBCA1DEE584E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,9 +39,16 @@ Global
 		{9CCB1040-A399-4904-9AB8-E8EAD395519D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CCB1040-A399-4904-9AB8-E8EAD395519D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CCB1040-A399-4904-9AB8-E8EAD395519D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C4EE6E-654C-44B2-A92E-EBCA1DEE584E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C4EE6E-654C-44B2-A92E-EBCA1DEE584E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C4EE6E-654C-44B2-A92E-EBCA1DEE584E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C4EE6E-654C-44B2-A92E-EBCA1DEE584E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01C4EE6E-654C-44B2-A92E-EBCA1DEE584E} = {FF8D8ECD-EAB8-433C-B635-422774C5C469}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C9261D4B-31D5-43F5-9843-312CB3D3B33A}
