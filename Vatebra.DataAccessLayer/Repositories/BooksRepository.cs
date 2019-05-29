@@ -31,7 +31,7 @@ namespace Vatebra.DataAccessLayer.Repositories
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        public async Task<bool> createBook(Books req, string subscriptionDescription, int subscriptionAmount = 0)
+        public async Task<bool> createBook(Books req, string subscriptionDescription,Decimal subscriptionAmount = 0)
         {
             var response = false; 
             try

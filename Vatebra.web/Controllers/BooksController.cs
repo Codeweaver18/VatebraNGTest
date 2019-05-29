@@ -29,7 +29,7 @@ namespace Vatebra.web.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> CreateBooks(BookViewModel vm)
+        public async Task<IActionResult> CreateBooks(CreateBookViewModel vm)
         {
 
             try
@@ -37,7 +37,7 @@ namespace Vatebra.web.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    var result =await _bookService.createBook(new DataAccessLayer.Entities.Books { BookAuthor = vm.BookAuthor, bookName = vm.bookName, bookTitle = vm.bookTitle });
+                    var result = await _bookService.createBook(new DataAccessLayer.Entities.Books { BookAuthor = vm.BookAuthor, bookName = vm.bookName, bookTitle = vm.bookTitle }, vm.Description, vm.Amount);
                     if (result)
                     {
                         _logger.LogInformation("New Book has been Created with");

@@ -20,12 +20,14 @@ namespace Vatebra.core.Services
         }
 
 
-        /// <summary>
-        /// Create new book
-        /// </summary>
-        /// <param name="req"></param>
-        /// <returns></returns>
-        public async Task<bool> createBook(Books req, string subscriptionDescription, int subscriptionAmount = 0)
+       /// <summary>
+       /// create new book and it subscription details
+       /// </summary>
+       /// <param name="req"></param>
+       /// <param name="subscriptionDescription"></param>
+       /// <param name="subscriptionAmount"></param>
+       /// <returns></returns>
+        public async Task<bool> createBook(Books req, string subscriptionDescription, Decimal subscriptionAmount = 0)
         {
             var response = false;
             try
