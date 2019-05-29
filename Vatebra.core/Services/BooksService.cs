@@ -65,7 +65,7 @@ namespace Vatebra.core.Services
                 if (bookId != 0)
                 {
                 response= await _repo.updateBookRecord(bookId, bookName, bookTitle, author);
-
+                    _logger.LogInformation("book with id ::=>" + bookId + " has been updated by user::???");
                 }
 
             }

@@ -207,6 +207,7 @@ namespace Vatebra.web.Controllers
                 if (result)
                 {
                     _logger.LogInformation("Book has been deleted with ID::=>"+id);
+                    return RedirectToAction("ViewBooks");
 
                 }
             }
