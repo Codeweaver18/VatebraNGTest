@@ -37,12 +37,12 @@ namespace Vatebra.web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            /* var cxn = Configuration["Dbcxn"].ToString();/*////configuration string
-            var conect = Configuration;
+            //configuring dbcontext
             var cxn = Configuration["DbconnectionString"].ToString();
             services.AddDbContext<VatebraDbContext>(options =>
              options.UseSqlServer(cxn)
              .UseLazyLoadingProxies());
+
             services.AddTransient<BooksRepository>();
             services.AddTransient<BooksService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

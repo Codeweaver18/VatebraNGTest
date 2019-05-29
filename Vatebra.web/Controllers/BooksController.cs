@@ -40,6 +40,7 @@ namespace Vatebra.web.Controllers
             {
 
                 _logger.LogError(ex, "An Error has occured, Test May Not be created");
+                return StatusCode(500, ex.Message);
             }
 
             return View();
@@ -47,7 +48,10 @@ namespace Vatebra.web.Controllers
 
         }
 
-
+        /// <summary>
+        /// Get method for createbooks
+        /// </summary>
+        /// <returns></returns>
        [HttpGet]
         public async Task<IActionResult> CreateBooks()
         {
