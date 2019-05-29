@@ -1,0 +1,78 @@
+﻿@using Vatebra.core.Services;
+@inject BooksService _bookService;
+@{
+    ViewData["Title"] = "viewBooksDetails";
+
+    var book = await _bookService.getBook(int.Parse(ViewData["viewBookId"].ToString()));
+}
+<tr>
+    
+
+
+</tr>
+<h4>List of All copies of Book ""</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Year Published
+            </th>
+            <th>
+                Book Abstract
+            </th>
+            <th>
+                Version Description
+            </th>
+            <th>
+                Version Title
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in books)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookAuthor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.Description)
+                </td>
+                @{
+                    if (item.BookSubscriptionDetails.isfree == "YES")
+                    {
+                        <td class="text-success">
+                            @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.isfree)
+                        </td>
+                    }
+
+                    else if (item.BookSubscriptionDetails.isfree == "NO")
+                    {
+                        <td class="text-danger">
+                            @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.isfree)
+                        </td>
+                    }
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookSubscriptionDetails.Amount)
+                </td>
+                <td>
+                    @item.bookCopies.Count.ToString()
+                </td>
+                <td>
+                    @Html.ActionLink("Update Details", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("More Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete Book", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Add Copies", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
