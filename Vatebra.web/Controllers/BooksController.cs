@@ -243,6 +243,7 @@ namespace Vatebra.web.Controllers
         {
             try
             {
+                var result= _bookService.
 
             }
             catch (Exception ex)

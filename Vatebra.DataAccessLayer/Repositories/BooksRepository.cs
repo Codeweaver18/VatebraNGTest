@@ -12,7 +12,7 @@ namespace Vatebra.DataAccessLayer.Repositories
     /// <summary>
     /// Class repository for handling all sort of database persistency.
     /// //******************
-   
+
     /// </summary>
     public class BooksRepository : GenericRepository<BooksRepository>
     {
@@ -26,6 +26,26 @@ namespace Vatebra.DataAccessLayer.Repositories
         }
 
 
+        public async Task<bool> borrowBooks(BooksBorrowed req){
+
+            var response = false;
+            try
+            {
+                _dbContext.BooksBorrowed.Add(req);
+                if (await _dbContext.SaveChangesAsync()>0)
+                {
+                    response = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return response;
+        }
         /// <summary>
         /// Create/Persit new book record into the Db and also add it type of subscription
         /// TODO:// All Literals should be in enums
