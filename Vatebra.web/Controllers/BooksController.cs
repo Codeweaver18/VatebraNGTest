@@ -238,12 +238,24 @@ namespace Vatebra.web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Borrow books from the library
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> borrowBooks(borowbookViewModel vm)
         {
             try
             {
-                var result= _bookService.
+              var book = _bookService.getBook(int.Parse(vm.bookid));
+              if (book==null)
+                {
+                    return View();
+                    //ToDO:: add view Data error mesage here
+                }
+
+                var result = _bookService.borrowBooks(new BooksBorrowed { ApprovedById = string.Empty, books = book, comments = vm.comments, dateBorrowed = vm.dateBorrowed, dueReturnedDate = vm.dueReturnedDate });//in an ideal situation, i prefer to use automapper;
 
             }
             catch (Exception ex)
@@ -257,7 +269,10 @@ namespace Vatebra.web.Controllers
             return View();
         }
         
-
+        /// <summary>
+        /// Generic admin view
+        /// </summary>
+        /// <returns></returns>
         public IActionResult AdminView()
         {
             return View();
