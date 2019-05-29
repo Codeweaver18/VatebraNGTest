@@ -66,6 +66,7 @@ namespace Vatebra.DataAccessLayer.Repositories
                     {
                         //create copies of the book
                         _dbContext.BookCopies.Add(new BookCopies {Books=req, bookAbstract=bookAbstract, description=subscriptionDescription, versionTitle=versionTitle, yearPublished=yearPublished});
+                       await _dbContext.SaveChangesAsync();//saving changes to database
 
                         response = true;
                         return response;

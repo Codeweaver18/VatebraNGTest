@@ -26,6 +26,7 @@ namespace Vatebra.web.ViewModels
 
         [Required]
         [Display(Name = "Amount")]
+        [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
 
         [Required]
@@ -34,6 +35,7 @@ namespace Vatebra.web.ViewModels
         public DateTime yearPublished { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Books Abstract")]
         public string bookAbstract { get; set; }
       
