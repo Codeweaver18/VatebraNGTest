@@ -43,6 +43,7 @@ namespace Vatebra.web.Controllers
                         _logger.LogInformation("New Book has been Created with");
                         ViewData["CreateBookMessage"] = "New Book has been created successfully";//TODO: Make all this literals to enums to avoid too much strings
 
+                        return View();
                     }
                 }
             }
@@ -73,7 +74,7 @@ namespace Vatebra.web.Controllers
 
 
         /// <summary>
-        /// Get List of all books in the system
+        /// Get List of all books in the system=?NOTE: implementation is done from razor view using injectable service
         /// </summary>
         /// <returns></returns>
         public async Task<IActionResult> ViewBooks()

@@ -28,6 +28,7 @@ namespace Vatebra.DataAccessLayer.Repositories
 
         /// <summary>
         /// Create/Persit new book record into the Db and also add it type of subscription
+        /// TODO:// All Literals should be in enums
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
